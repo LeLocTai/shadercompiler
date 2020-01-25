@@ -38,7 +38,8 @@ func compile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpFile, writeErr := ioutil.TempFile("./tmp", "code-*.hlsl")
+	_ = os.MkdirAll("./hlsl", os.ModeDir)
+	tmpFile, writeErr := ioutil.TempFile("./hlsl", "code-*.hlsl")
 	if writeErr != nil {
 		http.Error(w, writeErr.Error(), http.StatusInternalServerError)
 		return
